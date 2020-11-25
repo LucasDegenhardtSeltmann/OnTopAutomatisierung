@@ -6,7 +6,7 @@ Die Automatisierung im Rahmen des Softwareprojekts zur Bewässerung und Auswertu
 * Responsive Design
 * Livestream der Webcam
 * Graphen mit Interessanten Infos
- * Umsetzung mithilfe freier Bibliothek zB. charts.js
+  * Umsetzung mithilfe freier Bibliothek zB. charts.js
 * Bildergallerie
 * Über uns 
 
@@ -14,7 +14,7 @@ Die Automatisierung im Rahmen des Softwareprojekts zur Bewässerung und Auswertu
 * Sammlung und Visualisierung aller erfassten Daten
   * Erstellung von Graphen anhand Ausgewählter Daten
   * Abruf der Daten in passendem Format ( csv, xls, pdf )
-* Administreierung für Öffentlichkeits Ansicht
+* Administrierung für Öffentlichkeits Ansicht
 
 ## App 
 * Losgelöst von Website?
