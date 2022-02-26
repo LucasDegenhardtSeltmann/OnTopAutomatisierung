@@ -1,0 +1,24 @@
+version: '3'
+services:
+   web:
+      image: nginx:latest
+      ports:
+         - "80:80"
+         - "443:443"
+      volumes:
+         - /home/ontop/docker-nginx/html:/usr/share/nginx/html
+         - /home/ontop/docker-nginx/nginx-docker:/etc/nginx
+      networks:
+         - ontop
+   php-fpm:
+      build:
+         context: ./php-fpm
+      volumes:
+        - ./html:/usr/share/nginx/html
+      networks:
+        - ontop
+
+networks:
+   ontop:
+      external: true
+      name: ontop

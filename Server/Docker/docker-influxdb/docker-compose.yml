@@ -1,0 +1,75 @@
+version: '3'
+services:
+        mosquitto:
+                image: eclipse-mosquitto
+                container_name: mqtt
+                restart: unless-stopped
+                volumes:
+                        - ./mosquitto/config:/mosquitto/config
+                        - ./mosquitto/data:/mosquitto/data
+                        - ./mosquitto/log:/mosquitto/log
+                ports:
+                        - "1881:1881"
+                networks:
+                        - ontop
+        influxdb:
+                image: quay.io/influxdb/influxdb:v2.0.7
+                restart: unless-stopped
+                volumes:
+                        - ./influxdb2/data:/root/.influxdbv2
+                        - ./influxdb2/config:/etc/influxdb2
+                        - ./telegraf/mytelegraf.conf:/etc/telegraf/telegraf.conf
+                ports:
+                        #- "80:8086"
+                        - "8086:8086"
+                networks:
+                        - ontop
+        influxdb_setup: #Erstellt Benutzer bei Restart
+                links:
+                        - influxdb
+                image: quay.io/influxdb/influxdb:v2.0.6
+                entrypoint: influx setup --bucket initial -t influxdbtoken -o ontop.hs-bochum.de --username=<user> --password=<pw> --host=http://influxdb:8086 -f      
+                restart: on-failure:10
+                volumes:
+                        - ./telegraf/mytelegraf.conf:/etc/telegraf/telegraf.conf
+                networks:
+                        - ontop
+                depends_on:
+                        - influxdb
+        telegraf:
+                image: telegraf
+                links:
+                        - influxdb
+                restart: unless-stopped
+                volumes:
+                        - ./telegraf/mytelegraf.conf:/etc/telegraf/telegraf.conf
+                networks:
+                        - ontop
+                depends_on:
+                        - influxdb
+        grafana:
+                image: grafana/grafana:8.0.3
+                restart: unless-stopped
+                user: "0:0"
+                volumes:
+                        - ./grafana/data:/var/lib/grafana
+                        - ./grafana/config:/etc/grafana
+                ports:
+                        - "3000:3000"
+                networks:
+                        - ontop
+                depends_on:
+                        - influxdb
+                environment:
+                        - "GF_SECURITY_ADMIN_USER=<user>"
+                        - "GF_SECURITY_ADMIN_PASSWORD=<pw>"
+                        - "GF_SERVER_ROOT_URL=http://ontop.hs-bochum.de/grafana"
+                        - "GF_LOG_LEVEL=debug"
+                        - "GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.23/cloudspout-button-panel.zip;cloudspout-button-panel"
+volumes:
+        influxdbv2:
+
+networks:
+        ontop:
+                external: true
+                name: ontop

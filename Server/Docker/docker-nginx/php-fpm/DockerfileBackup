@@ -1,0 +1,8 @@
+FROM bitnami/php-fpm
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+RUN composer require influxdata/influxdb-client-php
+
+RUN apt-get update -y
+RUN apt-get install -y python3-pip
+RUN pip3 install -y paho-mqtt

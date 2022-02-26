@@ -1,0 +1,42 @@
+{
+  "type": "panel",
+  "name": "Button Panel",
+  "id": "cloudspout-button-panel",
+  "info": {
+    "description": "Panel for a single button",
+    "author": {
+      "name": "CloudSpout LLC",
+      "url": "https://github.com/cloudspout/cloudspout-button-panel/"
+    },
+    "keywords": [
+      "panel", "rest", "button", "integration"
+    ],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/cloudspout/cloudspout-button-panel"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/cloudspout/cloudspout-button-panel/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [
+        {
+          "path": "img/screenshot.png",
+          "name": "Settings"
+        }
+    ],
+    "version": "7.0.23",
+    "updated": "2020-11-24"
+  },
+  "dependencies": {
+    "grafanaVersion": "7.x.x",
+    "grafanaDependency": ">=7.0.0", 
+    "plugins": []
+  }
+}
