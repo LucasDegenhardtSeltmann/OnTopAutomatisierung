@@ -1,0 +1,59 @@
+#menu {
+    width: 100%;
+    text-align: center;
+}
+#headline {
+    color: #e2001a;
+    font-family: Helvetica;
+    font-weight: 400;
+    font-size: 4.75rem;
+}
+#grafanaLink {
+    height: 5em;
+}
+#camLink {
+    height: 5em;
+    filter: invert(100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  position: relative;
+  background-color: #f1f1f1;
+  height: 20em;
+  text-align: center;
+  font-size: 30px;
+}
+
+.row {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+}
+
+.column {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 10px;
+}
+
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .row {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
